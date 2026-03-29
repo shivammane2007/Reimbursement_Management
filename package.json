@@ -2,16 +2,17 @@
   "name": "reimbursement-management",
   "version": "1.0.0",
   "private": true,
-  "description": "Smart Expense Reimbursement Management System — Monorepo",
+  "description": "AI-powered reimbursement management system with OCR and fraud detection",
   "scripts": {
-    "dev": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"cyan,yellow\" \"npm run dev --workspace=apps/frontend\" \"npm run dev --workspace=apps/backend\"",
-    "dev:frontend": "npm run dev --workspace=apps/frontend",
-    "dev:backend": "npm run dev --workspace=apps/backend",
-    "build": "npm run build --workspace=apps/frontend && npm run build --workspace=apps/backend",
-    "lint": "npm run lint --workspace=apps/frontend"
+    "dev": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"cyan,yellow\" \"npm run dev --workspace=frontend\" \"npm run dev --workspace=backend\"",
+    "client": "npm run dev --workspace=frontend",
+    "server": "npm run dev --workspace=backend",
+    "build": "npm run build --workspace=frontend && npm run build --workspace=backend",
+    "lint": "npm run lint --workspace=frontend"
   },
   "workspaces": [
-    "apps/*"
+    "frontend",
+    "backend"
   ],
   "devDependencies": {
     "concurrently": "^8.2.2"
