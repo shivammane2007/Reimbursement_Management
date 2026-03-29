@@ -61,7 +61,7 @@ async function main() {
       isActive: true,
       includeDirectManager: true,
       minApprovalPercentage: 100,
-      overrideApproverId: admin.id,
+      specificApproverId: admin.id,
       steps: {
         create: [
           { order: 1, userId: manager.id },
