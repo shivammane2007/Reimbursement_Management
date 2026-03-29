@@ -1,0 +1,19 @@
+{
+  "name": "reimbursement-management",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Expense Reimbursement Management System — Monorepo",
+  "scripts": {
+    "dev": "concurrently --names \"FRONTEND,BACKEND\" --prefix-colors \"cyan,yellow\" \"npm run dev --workspace=apps/frontend\" \"npm run dev --workspace=apps/backend\"",
+    "dev:frontend": "npm run dev --workspace=apps/frontend",
+    "dev:backend": "npm run dev --workspace=apps/backend",
+    "build": "npm run build --workspace=apps/frontend && npm run build --workspace=apps/backend",
+    "lint": "npm run lint --workspace=apps/frontend"
+  },
+  "workspaces": [
+    "apps/*"
+  ],
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
