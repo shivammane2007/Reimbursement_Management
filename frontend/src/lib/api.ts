@@ -24,6 +24,7 @@ async function handleResponse<T>(res: Response): Promise<T> {
     const body = await res.json().catch(() => ({ error: res.statusText }));
     const error = new Error(body.error || `HTTP ${res.status}`) as any;
     error.details = body.details; // Carry detail metadata for UI
+    error.status = res.status;
     throw error;
   }
   return res.json() as Promise<T>;

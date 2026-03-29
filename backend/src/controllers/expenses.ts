@@ -174,7 +174,7 @@ export const approveExpense = async (req: AuthRequest, res: Response) => {
     // Check if user is an authorized approver for this rule
     const isDirectManager = rule.includeDirectManager && currentUser.id === expense.employee.managerId;
     const isInSequence = rule.steps.some((s: any) => s.userId === currentUser.id);
-    const isOverrideApprover = rule.overrideApproverId === currentUser.id;
+    const isOverrideApprover = rule.specificApproverId === currentUser.id;
 
     if (currentUser.role !== "ADMIN" && !isDirectManager && !isInSequence && !isOverrideApprover) {
       return res.status(403).json({ error: "Strict: You are not an authorized approver for this rule." });

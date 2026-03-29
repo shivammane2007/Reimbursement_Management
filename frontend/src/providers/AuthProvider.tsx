@@ -37,9 +37,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setToken(storedToken);
       authApi.me()
         .then(({ user }) => setUser(user))
-        .catch(() => {
-          localStorage.removeItem("auth_token");
-          localStorage.removeItem("auth_user");
+        .catch((err) => {
+          // Only destroy session if explicitly rejected (e.g. token expired)
+          if (err?.status === 401 || err?.status === 403) {
+            localStorage.removeItem("auth_token");
+            localStorage.removeItem("auth_user");
+            setUser(null);
+            setToken(null);
+          } else {
+            // Keep the user logged in if the error was a transient network crash and backend is unreachable
+            const storedUser = localStorage.getItem("auth_user");
+            if (storedUser) {
+              try { setUser(JSON.parse(storedUser)); } catch {}
+            }
+          }
         })
         .finally(() => setIsLoading(false));
     } else {
